@@ -40,7 +40,7 @@ http://localhost:8000/
 
 If you want to check if the backend works, just put the link in the browser and you shld see this
 
-![Server status screenshot](./image.png)
+![Server status screenshot](./server_healthy.png)
 
 ### 📁 File Structure
 
