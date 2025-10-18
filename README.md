@@ -80,10 +80,10 @@ Please refer to the COMMIT_MESSAGES.md file in the root directory for the standa
 # Required to run the app
 # Fill up later
 SERVER_BASE_URL='http://localhost:8000'
-CLIENT_BASE_URL='http://localhost:3000'
-SUPABASE_URL='https://eogovjmmjyzzzlkuyohc.supabase.co'
-SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVvZ292am1tanl6enpsa3V5b2hjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY3NDAzOTcsImV4cCI6MjA3MjMxNjM5N30.pxauv2cbD4xoQ52aezJ_aDjsKDanLco4FcvAcPA1tz4'
-DB_PASSWORD='weW1nn1ngTh15Guy5!'
+CLIENT_BASE_URL='http://localhost:5173/'
+SUPABASE_URL='https://lckghapuxijhsfydfzmy.supabase.coo'
+SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxja2doYXB1eGlqaHNmeWRmem15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA3OTY0MzAsImV4cCI6MjA3NjM3MjQzMH0.yjW7FEGKDuhpPI-AMuOcj-1UJRP7AbMNvLyAbE1Q5RA'
+DB_PASSWORD='root'
 PORT=8000
 
 # Later below API keys will be added
