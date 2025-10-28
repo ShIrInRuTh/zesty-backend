@@ -5,6 +5,7 @@ const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 8000;
+
 const routes = require("./routes/routers"); // point to main router file
 
 app.use(cors());
@@ -18,6 +19,6 @@ app.get("/", (req, res) => {
 // Use all API routes under /api
 app.use("/api", routes);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+app.listen(PORT, () =>
+  console.log(`Server running on http://localhost:${PORT}`)
+);
