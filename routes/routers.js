@@ -3,6 +3,10 @@ const router = express.Router();
 
 const authRoutes = require("./authRoutes");
 const recipeRoutes = require("./recipeRoutes");
+const fridgeRoutes = require("./fridgeRoutes")
+
+router.use("/fridge", fridgeRoutes);
+
 
 // Mount auth routes at /api/auth (if have any)
 router.use("/auth", authRoutes);
