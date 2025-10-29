@@ -1,10 +1,16 @@
-// supabaseClient.js (CommonJS style)
-require('dotenv').config();
-async function getSupabaseClient() {
-  const { createClient } = await import('@supabase/supabase-js')
-  const supabaseUrl = process.env.SUPABASE_URL
-  const supabaseAnonKey = process.env.SUPABASE_KEY
-  return createClient(supabaseUrl, supabaseAnonKey)
+// supabase.js (Fixed CommonJS version)
+require("dotenv").config();
+const { createClient } = require("@supabase/supabase-js");
+
+function getSupabaseClient() {
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseAnonKey = process.env.SUPABASE_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error("Missing Supabase environment variables");
+  }
+
+  return createClient(supabaseUrl, supabaseAnonKey);
 }
 
 module.exports = getSupabaseClient;
