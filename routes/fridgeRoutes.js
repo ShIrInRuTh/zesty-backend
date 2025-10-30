@@ -3,6 +3,6 @@ const router = express.Router();
 
 const test= require("../controller/fridgeController");
 
-router.get("/:id", test)
+router.post("/:id", test)
 
 module.exports = router;
