@@ -1,6 +1,5 @@
 require('dotenv').config();
-const { createClient } = require('@supabase/supabase-js');
-// const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
+const supabase = require('../utils/supabaseClient');
 
 const authenticateUser = async (req, res, next) => {
   const token = req.headers.authorization?.split('Bearer ')[1];
@@ -14,11 +13,6 @@ const authenticateUser = async (req, res, next) => {
 };
 
 module.exports = authenticateUser;
-
-
-
-
-const supabase = require('../utils/supabaseClient');
 
 async function checkAuth(req, res, next) {
   try {
