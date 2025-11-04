@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const imgreco = require("../controller/imgrecogController"); // point to your controller file
+const { imgrecoHandler } = require("../controller/imgrecogController"); // point to your controller file
 
 // POST /api/imgreco
-router.post("/", imgreco);
+router.post("/", imgrecoHandler);
 
 module.exports = router;
