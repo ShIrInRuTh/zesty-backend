@@ -111,11 +111,88 @@ const addUser = async (name, email, password) => {
   }
 };
 
+
+// --- New profile-related helpers ---
+const getUserById = async (userId) => {
+  const supabase = await getSupabaseClient();
+  const { data, error } = await supabase
+    .from("users")
+    .select("user_id, username, email, created_at, image_url")
+    .eq("user_id", userId)
+    .single();
+  if (error) return null;
+  return data;
+};
+
+const updateUserProfile = async (userId, { username, email }) => {
+  const supabase = await getSupabaseClient();
+  const { data, error } = await supabase
+    .from("users")
+    .update({ username, email })
+    .eq("user_id", userId)
+    .select("user_id, username, email, image_url, created_at")
+    .single();
+  if (error) throw error;
+  return data;
+};
+
+const updateUserPassword = async (userId, currentPassword, newPassword) => {
+  const supabase = await getSupabaseClient();
+  if (currentPassword) {
+    const { data: existing, error: err1 } = await supabase
+      .from("users")
+      .select("password")
+      .eq("user_id", userId)
+      .single();
+    if (err1) throw err1;
+    if (!existing || existing.password !== currentPassword) return false;
+  }
+  const { error } = await supabase
+    .from("users")
+    .update({ password: newPassword })
+    .eq("user_id", userId);
+  if (error) throw error;
+  return true;
+};
+
+const updateUserAvatar = async (userId, imageUrl) => {
+  const supabase = await getSupabaseClient();
+  const { data, error } = await supabase
+    .from("users")
+    .update({ image_url: imageUrl })
+    .eq("user_id", userId)
+    .select("user_id, username, email, image_url, created_at")
+    .single();
+  if (error) throw error;
+  return data;
+};
+
+const deleteUserAndFridge = async (userId) => {
+  const supabase = await getSupabaseClient();
+  // Delete fridge items by user's fridge
+  const fridgeId = await getFridgeIdByUser(userId);
+  if (fridgeId) {
+    await supabase.from("fridge_items").delete().eq("fridge_id", fridgeId);
+    await supabase.from("fridge").delete().eq("fridge_id", fridgeId);
+  }
+  // Delete liked/recipes by this user (optional best-effort)
+  await supabase.from("recipes").delete().eq("user_id", userId);
+  // Finally delete user
+  const { error } = await supabase.from("users").delete().eq("user_id", userId);
+  if (error) throw error;
+};
+
+
 module.exports = {
   loginUser,
   findUserByCredentials,
   getFridgeIdByUser,
   addUser,
+  getUserById,
+  updateUserProfile,
+  updateUserPassword,
+  updateUserAvatar,
+  deleteUserAndFridge,
 };
 
 /**
