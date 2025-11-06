@@ -10,6 +10,8 @@ const {
   likeARecipe,
   getInProgressRecipes,
   getCompletedRecipes,
+  addRecipe,
+  getRecipeById,
 } = require("../model/recipeModel");
 
 const client = new AssemblyAI({ apiKey: process.env.API_KEY_ASSEMBLY });
@@ -359,6 +361,28 @@ const getUserCompletedRecipes = async (req, res) => {
   }
 };
 
+const startRecipe = async (req, res) => {
+  try {
+    const { recipe } = req.body;
+    const data = await addRecipe(recipe);
+    res.status(200).json({ data: data });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const findRecipeById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await getRecipeById(id);
+    res.status(200).json({ data: data });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   talkToAI,
   speechToText,
@@ -368,4 +392,6 @@ module.exports = {
   unlikeRecipe,
   getUserInProgressRecipes,
   getUserCompletedRecipes,
+  startRecipe,
+  findRecipeById,
 };

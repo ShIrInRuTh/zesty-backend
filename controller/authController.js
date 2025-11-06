@@ -34,6 +34,7 @@ const login = async (req, res) => {
           id: user.user_id,
           email: user.email,
           fridge_id: user.fridge_id,
+          profile_pic: user.image_url,
         },
       });
     }
